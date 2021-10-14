@@ -97,9 +97,6 @@ dependencies {
     // Gson
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
 
-    // Picasso
-    implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
-
     // Lottie
     implementation "com.airbnb.android:lottie:$rootProject.lottieVersion"
 
