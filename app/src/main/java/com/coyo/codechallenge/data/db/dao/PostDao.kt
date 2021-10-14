@@ -23,8 +23,11 @@ interface PostDao {
     suspend fun delete(post: Post)
 
 
-    @Query("SELECT * FROM posts")
+    @Query("SELECT * FROM posts order by id")
     fun getAll(): PagingSource<Int, Post>
+
+    @Query("DELETE FROM posts")
+    fun deleteAll()
 
     @Query("select * from posts where id=:postId")
     suspend fun getComment(postId: Int): Post

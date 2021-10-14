@@ -13,7 +13,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideApodApi(): PlaceholderApi {
+    fun providePlaceholderApi(): PlaceholderApi {
         return PlaceholderApi.create()
     }
 }

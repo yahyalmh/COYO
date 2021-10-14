@@ -51,7 +51,7 @@ ext {
 
     // Gson
     gsonVersion = '2.8.8'
-    
+
     // Lottie
     lottieVersion = "4.1.0"
 
