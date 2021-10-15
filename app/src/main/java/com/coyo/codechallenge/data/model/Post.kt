@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 @Entity(tableName = "posts")
 data class Post(
@@ -23,4 +24,4 @@ data class Post(
     @SerializedName("body")
     @ColumnInfo(name = "body")
     val body: String,
-)
+) : Serializable // implement serializable to pass this class among fragments
