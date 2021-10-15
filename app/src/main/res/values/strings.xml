@@ -4,6 +4,7 @@
     <string name="cancel">Cancel</string>
     <string name="title_home">Posts</string>
     <string name="post_details_title">Post</string>
+    <string name="comments_count">%1$d comments</string>
     <string name="image_description">Float Button</string>
     <string name="InternetUnavailable">Internet is not available, check your connection and swipe down to refresh</string>
     <string name="NoMoreItemAvailable">No more item is available (max 100 post is available)</string>
