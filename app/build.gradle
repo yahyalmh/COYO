@@ -27,9 +27,13 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            debuggable false
+            shrinkResources false
+            multiDexEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -47,6 +51,13 @@ android {
     testOptions {
         testOptions {
             unitTests.includeAndroidResources = true
+        }
+    }
+
+    // Set generated apk file name
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = "COYO_v${defaultConfig.versionName}.apk"
         }
     }
 }
