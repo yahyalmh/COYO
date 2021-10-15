@@ -7,14 +7,12 @@ import com.coyo.codechallenge.data.model.Post
 
 @Dao
 interface PostDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertArray(vararg posts: Post)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertList(posts: List<Post>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(post: Post)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertList(posts: List<Post>)
 
     @Update
     suspend fun update(post: Post)

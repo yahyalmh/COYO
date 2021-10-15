@@ -6,11 +6,9 @@ import com.coyo.codechallenge.data.model.Comment
 
 @Dao
 interface CommentDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertArray(vararg comments: Comment)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertList(comments: List<Comment>)
+    suspend fun insertList(comments: List<Comment>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(comments: Comment)
@@ -23,6 +21,9 @@ interface CommentDao {
 
     @Query("select * from comments where id=:commentsId")
     suspend fun getComment(commentsId: Int): Comment
+
+    @Query("select * from comments where postId=:postId")
+    suspend fun getPostComments(postId: String): List<Comment>?
 
     @Query("SELECT count(*) FROM comments")
     fun getCount(): Int

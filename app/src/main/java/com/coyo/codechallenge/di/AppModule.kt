@@ -26,4 +26,14 @@ class AppModule {
     @Singleton
     @Provides
     fun providePostDao(db: CoyoDatabase) = db.postDao()
+
+
+    @Singleton
+    @Provides
+    fun provideUserDao(db: CoyoDatabase) = db.userDao()
+
+
+    @Singleton
+    @Provides
+    fun provideCommentDao(db: CoyoDatabase) = db.commentDao()
 }
