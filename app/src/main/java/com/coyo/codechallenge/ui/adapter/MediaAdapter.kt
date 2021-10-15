@@ -6,28 +6,28 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.ViewBinding
 import com.coyo.codechallenge.data.model.Post
-import com.coyo.codechallenge.databinding.HomeListItemBinding
-import com.coyo.codechallenge.ui.adapter.holder.HomeViewHolder
+import com.coyo.codechallenge.databinding.PostListItemBinding
+import com.coyo.codechallenge.ui.adapter.holder.PostViewHolder
 import dagger.hilt.android.scopes.ActivityScoped
 
 
 @ActivityScoped
-class MediaAdapter(private val delegate: HomeViewHolder.ItemDelegate) :
-    PagingDataAdapter<Post, HomeViewHolder>(PostDiffCallback()) {
+class MediaAdapter(private val delegate: PostViewHolder.ItemDelegate) :
+    PagingDataAdapter<Post, PostViewHolder>(PostDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         lateinit var view: ViewBinding
-        view = HomeListItemBinding.inflate(
+        view = PostListItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        val homeViewHolder = HomeViewHolder(view)
+        val homeViewHolder = PostViewHolder(view)
         homeViewHolder.setDelegate(delegate)
         return homeViewHolder
     }
 
-    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val item = getItem(position)
         if (item != null) {
             holder.bind(item)

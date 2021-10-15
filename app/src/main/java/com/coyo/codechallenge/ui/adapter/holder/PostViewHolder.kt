@@ -2,9 +2,9 @@ package com.coyo.codechallenge.ui.adapter.holder
 
 import androidx.recyclerview.widget.RecyclerView
 import com.coyo.codechallenge.data.model.Post
-import com.coyo.codechallenge.databinding.HomeListItemBinding
+import com.coyo.codechallenge.databinding.PostListItemBinding
 
-class HomeViewHolder(private val binding: HomeListItemBinding) :
+class PostViewHolder(private val binding: PostListItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
     private lateinit var delegate: ItemDelegate
     lateinit var item: Post

@@ -20,7 +20,7 @@ import com.coyo.codechallenge.data.model.Post
 import com.coyo.codechallenge.databinding.FragmentHomeBinding
 import com.coyo.codechallenge.ui.adapter.MediaAdapter
 import com.coyo.codechallenge.ui.adapter.MediaLoadStateAdapter
-import com.coyo.codechallenge.ui.adapter.holder.HomeViewHolder
+import com.coyo.codechallenge.ui.adapter.holder.PostViewHolder
 import com.coyo.codechallenge.ui.component.OptionalDialog
 import com.coyo.codechallenge.ui.component.VerticalSpaceItemDecoration
 import com.coyo.codechallenge.util.AndroidUtils
@@ -36,7 +36,7 @@ import kotlinx.coroutines.launch
  */
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), HomeViewHolder.ItemDelegate {
+class HomeFragment : Fragment(), PostViewHolder.ItemDelegate {
     private var binding: FragmentHomeBinding? = null
     private lateinit var adapter: MediaAdapter
     private val viewModel: HomeViewModel by viewModels()
@@ -111,7 +111,7 @@ class HomeFragment : Fragment(), HomeViewHolder.ItemDelegate {
 
     private fun setErrorState(loadStates: CombinedLoadStates) {
         binding!!.swipeRefresh.isRefreshing = false
-        if (binding!!.listView.adapter!!.itemCount <= 0) {
+        if (binding!!.postsListView.adapter!!.itemCount <= 0) {
             binding!!.isError = true
         }
         binding!!.isLoading = false
@@ -143,8 +143,8 @@ class HomeFragment : Fragment(), HomeViewHolder.ItemDelegate {
     }
 
     private fun initRecyclerView() {
-        binding!!.listView.layoutManager = LinearLayoutManager(activity)
-        binding!!.listView.addItemDecoration(
+        binding!!.postsListView.layoutManager = LinearLayoutManager(activity)
+        binding!!.postsListView.addItemDecoration(
             VerticalSpaceItemDecoration(
                 AndroidUtils.dp(
                     requireActivity().applicationContext, 5f
@@ -152,13 +152,13 @@ class HomeFragment : Fragment(), HomeViewHolder.ItemDelegate {
             )
         )
 
-        binding!!.listView.adapter = adapter.withLoadStateHeaderAndFooter(
+        binding!!.postsListView.adapter = adapter.withLoadStateHeaderAndFooter(
             header = MediaLoadStateAdapter(adapter), footer = MediaLoadStateAdapter(adapter)
         )
-        binding!!.listView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding!!.postsListView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 lastFirstVisiblePosition =
-                    (binding!!.listView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                    (binding!!.postsListView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                 setArrowUpKey()
             }
         })
@@ -170,18 +170,18 @@ class HomeFragment : Fragment(), HomeViewHolder.ItemDelegate {
 
     private fun initArrowUpKey() {
         binding!!.arrowUp.setOnClickListener {
-            binding!!.listView.smoothScrollToPosition(0)
+            binding!!.postsListView.smoothScrollToPosition(0)
         }
     }
 
     private fun setArrowUpKey() {
         binding!!.needUpKey =
-            (binding!!.listView.layoutManager is GridLayoutManager && lastFirstVisiblePosition > 3) || (binding!!.listView.layoutManager is LinearLayoutManager && lastFirstVisiblePosition > 1)
+            (binding!!.postsListView.layoutManager is GridLayoutManager && lastFirstVisiblePosition > 3) || (binding!!.postsListView.layoutManager is LinearLayoutManager && lastFirstVisiblePosition > 1)
     }
 
     override fun onResume() {
         super.onResume()
-        (binding!!.listView.layoutManager!! as LinearLayoutManager).scrollToPositionWithOffset(
+        (binding!!.postsListView.layoutManager!! as LinearLayoutManager).scrollToPositionWithOffset(
             lastFirstVisiblePosition, 0
         )
     }
@@ -189,7 +189,7 @@ class HomeFragment : Fragment(), HomeViewHolder.ItemDelegate {
     override fun onPause() {
         super.onPause()
         lastFirstVisiblePosition =
-            (binding!!.listView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+            (binding!!.postsListView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
     }
 
     override fun onDestroyView() {

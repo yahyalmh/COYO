@@ -41,7 +41,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="@dimen/margin_big"
                     android:gravity="start|center"
                     android:text="@string/app_name"
                     android:textAppearance="?attr/textAppearanceHeadline5" />
@@ -55,12 +55,12 @@
             android:layout_below="@id/appbar">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listView"
+                android:id="@+id/postsListView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:divider="@android:color/transparent"
-                android:dividerHeight="10.0sp"
+                android:dividerHeight="@dimen/divider_height"
                 android:paddingStart="@dimen/card_side_margin"
                 android:paddingTop="@dimen/header_margin"
                 android:paddingEnd="@dimen/card_side_margin" />
@@ -70,7 +70,7 @@
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loadingView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="@dimen/lottie_anime_height"
             android:layout_centerInParent="true"
             android:visibility="@{isLoading ? View.VISIBLE : View.GONE}"
             app:lottie_autoPlay="true"
@@ -80,7 +80,7 @@
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/errorView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="@dimen/lottie_anime_height"
             android:layout_centerInParent="true"
             android:visibility="@{isError ? View.VISIBLE : View.INVISIBLE}"
             app:lottie_autoPlay="true"
@@ -92,12 +92,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/errorView"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/margin_small"
             android:fontFamily="@font/roboto_bold"
-            android:padding="3dp"
+            android:padding="@dimen/padding_extra_small"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_normal"
             android:visibility="@{isError ? View.VISIBLE : View.INVISIBLE}" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
