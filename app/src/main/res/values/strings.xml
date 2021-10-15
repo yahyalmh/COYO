@@ -7,4 +7,5 @@
     <string name="image_description">Float Button</string>
     <string name="InternetUnavailable">Internet is not available, check your connection and swipe down to refresh</string>
     <string name="NoMoreItemAvailable">No more item is available (max 100 post is available)</string>
+    <string name="account_des">account image</string>
 </resources>

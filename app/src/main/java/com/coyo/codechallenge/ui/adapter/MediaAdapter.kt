@@ -22,9 +22,9 @@ class MediaAdapter(private val delegate: PostViewHolder.ItemDelegate) :
             parent,
             false
         )
-        val homeViewHolder = PostViewHolder(view)
-        homeViewHolder.setDelegate(delegate)
-        return homeViewHolder
+        val postViewHolder = PostViewHolder(view)
+        postViewHolder.setDelegate(delegate)
+        return postViewHolder
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {

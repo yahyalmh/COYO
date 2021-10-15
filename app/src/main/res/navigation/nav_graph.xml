@@ -27,7 +27,7 @@
         android:label="@string/post_details_title"
         tools:layout="@layout/fragment_post_detail">
         <argument
-            android:name="postId"
-            app:argType="string" />
+            android:name="post"
+            app:argType="com.coyo.codechallenge.data.model.Post" />
     </fragment>
 </navigation>

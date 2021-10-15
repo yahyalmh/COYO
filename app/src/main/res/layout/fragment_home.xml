@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
@@ -63,7 +64,8 @@
                 android:dividerHeight="@dimen/divider_height"
                 android:paddingStart="@dimen/card_side_margin"
                 android:paddingTop="@dimen/header_margin"
-                android:paddingEnd="@dimen/card_side_margin" />
+                android:paddingEnd="@dimen/card_side_margin"
+                android:scrollbars="vertical" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

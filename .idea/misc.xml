@@ -4,14 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_arrow_up.xml" value="0.2230769230769231" />
+        <entry key="app/src/main/res/drawable-v24/ic_back.xml" value="0.19074074074074074" />
         <entry key="app/src/main/res/drawable-v24/ic_error.xml" value="0.1935185185185185" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1925925925925926" />
         <entry key="app/src/main/res/drawable-v24/round_shape.xml" value="0.12135416666666667" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1935185185185185" />
+        <entry key="app/src/main/res/layout-v26/fragment_post_detail.xml" value="0.21041666666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/comment_list_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_post_detail.xml" value="0.22" />
         <entry key="app/src/main/res/layout/home_list_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/network_state_item.xml" value="0.10233029381965553" />
+        <entry key="app/src/main/res/layout/post_list_item.xml" value="0.10233029381965553" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1935185185185185" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.18796296296296297" />
       </map>

@@ -198,7 +198,7 @@ class HomeFragment : Fragment(), PostViewHolder.ItemDelegate {
     }
 
     override fun itemClicked(item: Post) {
-        val actionHomeToDetail = HomeFragmentDirections.actionHomeToDetail(item.id.toString())
+        val actionHomeToDetail = HomeFragmentDirections.actionHomeToDetail(item)
         findNavController().navigate(actionHomeToDetail)
     }
 }

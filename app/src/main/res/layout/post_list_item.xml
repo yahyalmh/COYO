@@ -26,6 +26,7 @@
                 android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
                 android:padding="@dimen/padding_extra_small"
+                android:lines="3"
                 android:textAlignment="center"
                 android:textColor="@color/coyo_black"
                 android:textSize="@dimen/text_size_normal"
