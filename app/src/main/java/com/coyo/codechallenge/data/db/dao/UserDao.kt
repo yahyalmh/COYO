@@ -18,6 +18,9 @@ interface UserDao {
     @Delete(entity = User::class)
     suspend fun delete(user: User)
 
+    @Query("DELETE FROM users")
+    fun deleteAll()
+
     @Query("select * from users where id=:userId")
     suspend fun getUser(userId: String): User?
 

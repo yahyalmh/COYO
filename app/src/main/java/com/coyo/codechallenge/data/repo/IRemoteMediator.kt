@@ -1,7 +1,6 @@
 package com.coyo.codechallenge.data.repo
 
 import android.content.Context
-import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -40,10 +39,12 @@ class IRemoteMediator @Inject constructor(
 
     private suspend fun refresh(state: PagingState<Int, Post>): MediatorResult {
 
-        // clear database when want to refresh loaded data
+        // Clear database when want to refresh the loaded data
         if (!state.isEmpty()) {
             db.withTransaction {
                 db.postDao().deleteAll()
+                db.userDao().deleteAll()
+                db.commentDao().deleteAll()
             }
         }
 
@@ -51,6 +52,7 @@ class IRemoteMediator @Inject constructor(
             db.postDao().getCount()
         }
 
+        // If there is no post in database try to fetch first post's pageo
         if (count == 0) {
             val pageNumber = 1
             val data = try {
@@ -59,6 +61,7 @@ class IRemoteMediator @Inject constructor(
                 requestPosts(pageNumber, state.config.pageSize)
             }
 
+            // Save the result to database
             db.withTransaction {
                 db.postDao().insertList(data)
             }
@@ -68,25 +71,33 @@ class IRemoteMediator @Inject constructor(
 
     /**
      * This method try to get new data based on last date in db and add at the end of list
+     * There is no post more than 100 posts with this api
      */
     private suspend fun append(state: PagingState<Int, Post>): MediatorResult {
         val count = db.withTransaction {
             db.postDao().getCount()
         }
+
+        // Check if all posts are fetched then throw an exception
         if (count >= 100) {
             throw NoMoreItemAvailableException(context.getString(R.string.NoMoreItemAvailable))
         }
+
+        // Calc page number based on post's count in database
         var pageNumber = 1
         if (count >= state.config.pageSize) {
             pageNumber = (count / state.config.pageSize) + 1
         }
 
         val data = requestPosts(pageNumber, state.config.pageSize)
+
+        // Save the result in database
         db.withTransaction { db.postDao().insertList(data) }
         return MediatorResult.Success(endOfPaginationReached = false)
     }
 
     private suspend fun requestPosts(pageNumber: Int, pageSize: Int): List<Post> {
+        // Check if the internet is not available throw an exception
         if (!AndroidUtils.isInternetAvailable(context)) {
             throw InternetNotAvailableException(context.getString(R.string.InternetUnavailable))
         }
