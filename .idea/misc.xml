@@ -13,7 +13,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/comment_list_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_post_detail.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_post_detail.xml" value="0.21" />
         <entry key="app/src/main/res/layout/home_list_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/network_state_item.xml" value="0.10233029381965553" />
         <entry key="app/src/main/res/layout/post_list_item.xml" value="0.10233029381965553" />
