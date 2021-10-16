@@ -5,9 +5,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.launchActivity
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.PerformException
-import androidx.test.espresso.UiController
-import androidx.test.espresso.ViewAction
-import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
@@ -16,8 +13,6 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.coyo.codechallenge.ui.MainActivity
-import org.hamcrest.Matcher
-import org.hamcrest.Matchers.not
 import org.hamcrest.TypeSafeMatcher
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -36,13 +31,6 @@ class HomeFragmentTest {
     val scenario = launchActivity<MainActivity>()
 
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.coyo.codechallenge", appContext.packageName)
-    }
-
-    @Test
     fun fetchAllPosts_shouldNotPassMaxCount() {
         for (i in 1..10) {
             // Fetch ten item each time
@@ -50,7 +38,7 @@ class HomeFragmentTest {
                 .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>((i * 10), scrollTo()))
 
             // Wait till data loaded
-            onView(isRoot()).perform(waitFor(2000))
+            onView(isRoot()).perform(TestUtil.waitFor(4000))
         }
 
         // Get post list view item count
@@ -66,7 +54,7 @@ class HomeFragmentTest {
             override fun describeTo(description: org.hamcrest.Description?) {}
         }))
 
-        // Check item count with maximum
+        // Check the item count against maximum item count
         val maxItemCount = 101
         assertEquals(maxItemCount, itemCounts)
     }
@@ -77,12 +65,13 @@ class HomeFragmentTest {
         for (i in 1..10) {
             onView(withId(R.id.postsListView))
                 .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>((i * 10), scrollTo()))
-            onView(isRoot()).perform(waitFor(2000))
+            onView(isRoot()).perform(TestUtil.waitFor(4000))
         }
 
         // Scroll to item's position which not exist
+        val invalidPosition = 101
         onView(withId(R.id.postsListView))
-            .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(101, scrollTo()))
+            .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(invalidPosition, scrollTo()))
     }
 
     @Test(expected = PerformException::class)
@@ -96,45 +85,11 @@ class HomeFragmentTest {
             )
     }
 
-    /**
-     * Perform action of waiting for a specific time.
-     */
-    private fun waitFor(millis: Long): ViewAction {
-        return object : ViewAction {
-            override fun getConstraints(): Matcher<View> {
-                return isRoot()
-            }
-
-            override fun getDescription(): String {
-                return "Wait for $millis milliseconds."
-            }
-
-            override fun perform(uiController: UiController, view: View?) {
-                uiController.loopMainThreadForAtLeast(millis)
-            }
-        }
-    }
-
     @Test
-    fun whenClickPostItem_shouldShowDetailFragment() {
-        // Click on an item in post list view
-        onView(withId(R.id.postsListView))
-            .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
-
-        // Detail fragment must shown, check it by an item existence
-        onView(withId(R.id.description)).check(ViewAssertions.matches(isDisplayed()))
+    fun useAppContext() {
+        // Context of the app under test.
+        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+        assertEquals("com.coyo.codechallenge", appContext.packageName)
     }
 
-    @Test
-    fun whenDetailFragmentArias_shouldFetchCommentsCount() {
-        // Click on an item in post list view
-        onView(withId(R.id.postsListView))
-            .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
-
-        // Wait to load data
-        onView(isRoot()).perform(waitFor(15000))
-
-        //Check comments count should not be empty
-        onView(withId(R.id.commentsCount)).check(ViewAssertions.matches(not(withText(""))));
-    }
 }
