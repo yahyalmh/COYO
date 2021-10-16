@@ -10,6 +10,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 object BindingAdapters {
 
+    /**
+     * binding adapter to set fab visibility base on received condition
+     */
     @BindingAdapter("isFabGone")
     @JvmStatic
     fun bindIsFabGone(view: FloatingActionButton, isGone: Boolean?) {

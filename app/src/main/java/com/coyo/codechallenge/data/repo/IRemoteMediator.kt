@@ -37,6 +37,9 @@ class IRemoteMediator @Inject constructor(
         }
     }
 
+    /**
+     * Refresh data when user swipe and at first time
+     */
     private suspend fun refresh(state: PagingState<Int, Post>): MediatorResult {
 
         // Clear database when want to refresh the loaded data

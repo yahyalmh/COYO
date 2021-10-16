@@ -34,6 +34,10 @@ class MediaAdapter(private val delegate: PostViewHolder.ItemDelegate) :
         }
     }
 
+    /**
+     * callback to distinguish post items in list
+     * it leads to do not show duplicate items which fetched from the server in different requests
+     */
     private class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
         override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
             return oldItem.id == newItem.id

@@ -19,7 +19,7 @@ class AppModule {
     fun getDatabase(@ApplicationContext context: Context): CoyoDatabase {
         val dbName = "Coyo.db"
         return Room.databaseBuilder(context, CoyoDatabase::class.java, dbName)
-//            .addMigrations(*ALL_MIGRATION)
+//            .addMigrations(*ALL_MIGRATION) // if there is any migration must set this
             .build()
     }
 

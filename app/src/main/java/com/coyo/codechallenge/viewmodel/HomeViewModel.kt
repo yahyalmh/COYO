@@ -16,8 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val dbPostRepository: DbPostRepository,
-    savedStateHandle: SavedStateHandle
+    private val dbPostRepository: DbPostRepository
 ) : ViewModel() {
     private val clearListCh = Channel<Unit>(Channel.CONFLATED)
 

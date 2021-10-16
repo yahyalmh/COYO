@@ -12,7 +12,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.coyo.codechallenge.R
@@ -63,6 +62,13 @@ class HomeFragment : Fragment(), PostViewHolder.ItemDelegate {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         fetchPosts()
+        observeAdapterLoadStatFlow()
+    }
+
+    /**
+     * Observe the adapter's load state flow to set the fragment ui based on it
+     */
+    private fun observeAdapterLoadStatFlow() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 adapter.loadStateFlow.distinctUntilChanged { old, new ->
@@ -88,11 +94,13 @@ class HomeFragment : Fragment(), PostViewHolder.ItemDelegate {
         }
     }
 
+    /**
+     * Fetch posts on view life cycle with coroutines
+     */
     private fun fetchPosts() {
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-                viewModel.posts().collectLatest {
-                    adapter.submitData(it) }
+            viewModel.posts().collectLatest {
+                adapter.submitData(it)
             }
         }
     }
@@ -103,12 +111,18 @@ class HomeFragment : Fragment(), PostViewHolder.ItemDelegate {
         binding!!.swipeRefresh.isRefreshing = false
     }
 
+    /**
+     * Set load state when user want to refresh data
+     */
     private fun setLoadingState() {
         binding!!.swipeRefresh.isRefreshing = true
         binding!!.isLoading = true
         binding!!.isError = false
     }
 
+    /**
+     * Set error state on ui and show dialog based on the error message
+     */
     private fun setErrorState(loadStates: CombinedLoadStates) {
         binding!!.swipeRefresh.isRefreshing = false
         if (binding!!.postsListView.adapter!!.itemCount <= 0) {
@@ -133,8 +147,12 @@ class HomeFragment : Fragment(), PostViewHolder.ItemDelegate {
 
     private fun initAdapter() {
         adapter = MediaAdapter(this)
+
         //  restores the RecyclerView state only when the adapter is not empty (adapter.getItemCount() > 0)
-        adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        adapter.stateRestorationPolicy =
+            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+
+        // Hide error state when adapter has item(it happens when data fetched from db and api return error)
         adapter.addLoadStateListener {
             if (adapter.itemCount >= 1) {
                 binding!!.isError = false
@@ -143,7 +161,10 @@ class HomeFragment : Fragment(), PostViewHolder.ItemDelegate {
     }
 
     private fun initRecyclerView() {
+        // Set layout manager
         binding!!.postsListView.layoutManager = LinearLayoutManager(activity)
+
+        //Set item decoration
         binding!!.postsListView.addItemDecoration(
             VerticalSpaceItemDecoration(
                 AndroidUtils.dp(
@@ -152,9 +173,12 @@ class HomeFragment : Fragment(), PostViewHolder.ItemDelegate {
             )
         )
 
+        // Set adapter
         binding!!.postsListView.adapter = adapter.withLoadStateHeaderAndFooter(
             header = MediaLoadStateAdapter(adapter), footer = MediaLoadStateAdapter(adapter)
         )
+
+        // Set arrow fab visibility when scrolling
         binding!!.postsListView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 lastFirstVisiblePosition =
@@ -168,19 +192,26 @@ class HomeFragment : Fragment(), PostViewHolder.ItemDelegate {
         binding!!.swipeRefresh.setOnRefreshListener { adapter.refresh() }
     }
 
+    /**
+     * Set listener on arrow fab to scroll to position zero
+     */
     private fun initArrowUpKey() {
         binding!!.arrowUp.setOnClickListener {
             binding!!.postsListView.smoothScrollToPosition(0)
         }
     }
 
+    /**
+     * Show arrow fab when more than 1 item scrolled
+     */
     private fun setArrowUpKey() {
         binding!!.needUpKey =
-            (binding!!.postsListView.layoutManager is GridLayoutManager && lastFirstVisiblePosition > 3) || (binding!!.postsListView.layoutManager is LinearLayoutManager && lastFirstVisiblePosition > 1)
+            (binding!!.postsListView.layoutManager is LinearLayoutManager && lastFirstVisiblePosition > 1)
     }
 
     override fun onResume() {
         super.onResume()
+        // Scroll to the last visible item
         (binding!!.postsListView.layoutManager!! as LinearLayoutManager).scrollToPositionWithOffset(
             lastFirstVisiblePosition, 0
         )
@@ -188,6 +219,7 @@ class HomeFragment : Fragment(), PostViewHolder.ItemDelegate {
 
     override fun onPause() {
         super.onPause()
+        // Get the last visible item's position to scroll to its position
         lastFirstVisiblePosition =
             (binding!!.postsListView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
     }
@@ -197,6 +229,10 @@ class HomeFragment : Fragment(), PostViewHolder.ItemDelegate {
         binding = null
     }
 
+    /**
+     * Navigate to the detail fragment when an post item clicked
+     * Pass the clicked post to dest fragment
+     */
     override fun itemClicked(item: Post) {
         val actionHomeToDetail = HomeFragmentDirections.actionHomeToDetail(item)
         findNavController().navigate(actionHomeToDetail)

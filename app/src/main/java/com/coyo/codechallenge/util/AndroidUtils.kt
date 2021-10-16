@@ -10,6 +10,9 @@ import kotlin.math.ceil
 class AndroidUtils {
 
     companion object {
+        /**
+         * Convert a number to dp base on phone density
+         */
         fun dp(context: Context, value: Float): Int {
             val density = context.resources.displayMetrics.density;
 
@@ -18,6 +21,10 @@ class AndroidUtils {
             } else ceil(density * value).toInt()
         }
 
+        /**
+         * Check any type of internet availability
+         * @return true if internet is available otherwise false
+         */
         @Suppress("DEPRECATION")
         fun isInternetAvailable(context: Context): Boolean {
             try {

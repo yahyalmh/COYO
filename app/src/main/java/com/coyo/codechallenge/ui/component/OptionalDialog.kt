@@ -79,6 +79,9 @@ class OptionalDialog(context: Context) : AlertDialog(context) {
         window!!.setBackgroundDrawableResource(android.R.color.transparent)
     }
 
+    /**
+     * initialize the entire background for the dialog
+     */
     private fun initContentView() {
         contentView = LinearLayout(context)
         contentView.orientation = LinearLayout.VERTICAL
@@ -98,6 +101,10 @@ class OptionalDialog(context: Context) : AlertDialog(context) {
         )
     }
 
+    /**
+     *
+     * initialize the dialog background
+     */
     private fun initDialogContentView() {
         dialogContentView = LinearLayout(context)
         val shape = GradientDrawable()
@@ -196,6 +203,9 @@ class OptionalDialog(context: Context) : AlertDialog(context) {
         )
     }
 
+    /**
+     * Add an option to dialog vertically
+     */
     private fun addOption(text: String?, listener: OptionalDialogClickListener?) {
         if (text.isNullOrEmpty()) {
             return
@@ -229,6 +239,9 @@ class OptionalDialog(context: Context) : AlertDialog(context) {
         )
     }
 
+    /**
+     * Add two option to dialog horizontally
+     */
     private fun addTwoOptions() {
         val options = LinearLayout(context)
         options.orientation = LinearLayout.HORIZONTAL
@@ -306,6 +319,9 @@ class OptionalDialog(context: Context) : AlertDialog(context) {
         )
     }
 
+    /**
+     * Add cancel option to dialog apart from other options
+     */
     private fun addCancelButton() {
         val parentLayout = LinearLayout(context)
         val shape = GradientDrawable()
@@ -352,7 +368,9 @@ class OptionalDialog(context: Context) : AlertDialog(context) {
         }
     }
 
-
+    /**
+     * Helper method to draw line between elements
+     */
     private fun drawLine(
         view: LinearLayout = dialogContentView,
         orientation: Int = LinearLayout.HORIZONTAL,
@@ -381,6 +399,9 @@ class OptionalDialog(context: Context) : AlertDialog(context) {
         )
     }
 
+    /**
+     * Builder class to initialize the dialog
+     */
     class Builder(private val context: Context) {
         private val params = DialogParams()
 
@@ -441,6 +462,9 @@ class OptionalDialog(context: Context) : AlertDialog(context) {
 
     }
 
+    /**
+     * Different parameters which can set on the dialog
+     */
     class DialogParams {
         var mCancelable = true
         var withCancelBtn = false
@@ -491,6 +515,9 @@ class OptionalDialog(context: Context) : AlertDialog(context) {
         }
     }
 
+    /**
+     * OnClickListener interface when an option clicked
+     */
     interface OptionalDialogClickListener {
         fun onClick(dialog: OptionalDialog)
     }
