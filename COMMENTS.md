@@ -1,13 +1,13 @@
 # Comments 
 In this document, below topics are explained
 
-* [Architecture decisions](#Main-architecture-decisions-and-why?)
+* [Main architecture decisions and why?](#Main-architecture-decisions-and-why?)
 
-* [Third-party libraries](#List-of-third-party-libraries-if-any-with-WHYS?)
+* [List of third party libraries if any with WHYS?](#List-of-third-party-libraries-if-any-with-WHYS?)
 
-* [What could be improved](#What-could-be-improved-if-you-had-more-time?)
+* [What could be improved if you had more time?](#What-could-be-improved-if-you-had-more-time?)
   
-* [Asked but not delivered](#Mention-anything-that-was-asked-but-not-delivered-and-why,-and-any-additional-comments)
+* [Mention anything that was asked but not delivered and why, and any additional comments](#Mention-anything-that-was-asked-but-not-delivered-and-why,-and-any-additional-comments)
 
 
 ## Main architecture decisions and why?
