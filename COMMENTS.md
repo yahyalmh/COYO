@@ -1,16 +1,16 @@
 # Comments 
 In this document, below topics are explained
 
-* [Architecture decisions](#main-architecture-decisions-and-why?)
+* [Architecture decisions](#main-architecture-decisions-and-why)
 
-* [Third-party libraries](#list-of-third-party-libraries-if-any-with-whys?)
+* [Third-party libraries](#list-of-third-party-libraries-if-any-with-whys)
 
 * [What could be improved](#What-could-be-improved-if-you-had-more-time)
   
-* [Asked but not delivered](#mention-anything-that-was-asked-but-not-delivered-and-why,-and-any-additional-comments)
+* [Asked but not delivered](#mention-anything-that-was-asked-but-not-delivered-and-why-and-any-additional-comments)
 
 
-## Main architecture decisions and why?
+## Main architecture decisions and why
 
 * I used `Model-View-ViewModel(MVVM)` architecture because it is a clean architecture that separate view from business logic.
 
@@ -28,7 +28,7 @@ In this document, below topics are explained
 
 * I used Kotlin's `coroutines` and `suspend` methods to do asynchronous jobs. It is one of the best solutions to deal with asynchronous tasks, as I can run tasks on any thread(Main or IO) and get the result on the UI thread.
 
-## List of third party libraries if any with whys?
+## List of third party libraries if any with whys
 
 * I used the `Retrofit2` to interact with API and `Gson` to map response's JSON to data classes. I can retrieve and upload JSON to a rest-based web service using the retrofit library.
 
@@ -42,6 +42,6 @@ In this document, below topics are explained
 
 * If I had more time, I would improve the app UI.
 
-## Mention anything that was asked but not delivered and why, and any additional comments
+## Mention anything that was asked but not delivered and why and any additional comments
 
 * I have tried to cover everything, but I may have forgotten something or was not implemented completely. 
