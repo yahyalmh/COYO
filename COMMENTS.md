@@ -1,13 +1,13 @@
 # Comments 
 In this document, below topics are explained
 
-* [Main architecture decisions and why?](#Main-architecture-decisions-and-why?)
+* [Architecture decisions](#main-architecture-decisions-and-why?)
 
-* [List of third party libraries if any with WHYS?](#List-of-third-party-libraries-if-any-with-WHYS?)
+* [Third-party libraries](#list-of-third-party-libraries-if-any-with-whys?)
 
-* [What could be improved if you had more time?](#What-could-be-improved-if-you-had-more-time?)
+* [What could be improved](#What-could-be-improved-if-you-had-more-time)
   
-* [Mention anything that was asked but not delivered and why, and any additional comments](#Mention-anything-that-was-asked-but-not-delivered-and-why,-and-any-additional-comments)
+* [Asked but not delivered](#mention-anything-that-was-asked-but-not-delivered-and-why,-and-any-additional-comments)
 
 
 ## Main architecture decisions and why?
@@ -28,13 +28,13 @@ In this document, below topics are explained
 
 * I used Kotlin's `coroutines` and `suspend` methods to do asynchronous jobs. It is one of the best solutions to deal with asynchronous tasks, as I can run tasks on any thread(Main or IO) and get the result on the UI thread.
 
-## List of third party libraries if any with WHYS?
+## List of third party libraries if any with whys?
 
 * I used the `Retrofit2` to interact with API and `Gson` to map response's JSON to data classes. I can retrieve and upload JSON to a rest-based web service using the retrofit library.
 
 * I used the `Lottie` library to show lottie animations.
 
-## What could be improved if you had more time?
+## What could be improved if you had more time
 
 * If I had more time, I would have written more UI, integration, and unit tests.
 
