@@ -1,3 +1,3 @@
 # COYO
 
-App release version exists in app/release/ folder.
+Android application developed in Kotlin 
